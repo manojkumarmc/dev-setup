@@ -1,0 +1,49 @@
+- name: create projects folder
+  file: path="~/projects/{{item}}" state=directory
+  with_items:
+    - python
+    - test
+    - nodejs
+    - golang
+    - software
+    - docker
+
+- name: install epel-release
+  yum: name=epel-release state=latest
+
+- name: setup neovim repo
+  command: curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
+
+- name: do neovim install
+  yum: name=neovim state=latest
+
+- name: install zsh
+  command: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+- name: download powerline fonts
+  command: git clone https://github.com/powerline/fonts.git --depth=1 ~/projects/software/powerline
+
+- name: install powerline fonts
+  command: sh -c "~/projects/software/powerline/install.sh"
+
+- name: change zshell theme
+  command: sed -i -e '/^ZSH_THEME/s/robyrussel/wezm/g/' ~/.zshrc
+
+- name: download neovim rc
+  command: git clone https://github.com/manojkumarmc/vim.config ~/projects/software/vim.config
+
+- name: cp init.vim to home directory
+  command: cp ~/projects/software/vim.config/init.vim ~/.config/nvim/init.vim
+
+- name: install vim plugins
+  command: vim +'PlugInstall --sync' +qa
+
+- name: create p27 virtualenv
+  command: python -p `which python` ~/projects/software/p27
+
+- name: install ipython to p27 virtualenv
+  pip: virtualenv=~/projects/software/p27 name=ipython state=latest
+  with_items:
+    - ipython
+    - hypothesis
+    - requests
