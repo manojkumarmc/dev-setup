@@ -16,6 +16,13 @@
 - name: install linux dependencies
   yum: name={{item}} state=latest
     - epel-release
+    - gcc
+    - ncurses
+    - ncurses-devel
+    - make
+    - libevent
+    - libevent-devel
+    - automake
     - neovim
     - git
     - ctags
