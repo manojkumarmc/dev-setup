@@ -1,6 +1,4 @@
---
-
-- name: create projects folder
+- name: create nvim folder
   file: path="~/.config/nvim" state=directory
 
 - name: create projects folder
@@ -13,8 +11,12 @@
     - software
     - docker
 
+- name: setup neovim repo
+  command: curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
+
 - name: install linux dependencies
   yum: name={{item}} state=latest
+  with_items:
     - epel-release
     - gcc
     - ncurses
@@ -22,14 +24,18 @@
     - make
     - libevent
     - libevent-devel
+    - ruby
+    - ruby-devel
+    - python-devel
+    - tcl
+    - tcl-devel
+    - perl
+    - perl-devel
     - automake
     - neovim
     - git
     - ctags
     - zsh
-
-- name: setup neovim repo
-  command: curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
 
 - name: install neovim
   pip: name=neovim state=latest
