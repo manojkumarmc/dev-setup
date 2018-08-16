@@ -19,9 +19,19 @@
     - flux
     - gimp
     - neovim
+    - fzf
 
 - name: install zsh
   command: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+- name: install oh-my-zsh
+  command: curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -o /tmp/install.sh
+
+- name: install oh-my-zsh - step1
+  command: chmod +x /tmp/install.sh
+
+- name: install oh-my-zsh - step2
+  command: bash /tmp/install.sh
 
 - name: download powerline fonts
   command: git clone https://github.com/powerline/fonts.git --depth=1 ~/projects/software/powerline
@@ -31,4 +41,18 @@
 
 - name: change zshell theme
   command: sed -i -e '/^ZSH_THEME/s/robyrussel/wezm/g/' ~/.zshrc
+
+- name: install fzf
+  command: sh -c "/usr/local/opt/fzf/install"
+
+- name: download neovim rc
+    command: git clone https://github.com/manojkumarmc/vim.config ~/projects/software/vim.config
+
+- name: cp init.vim to home directory
+    command: cp ~/projects/software/vim.config/init.vim ~/.config/nvim/init.vim
+
+- name: setup vim plug manager
+    command: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 
