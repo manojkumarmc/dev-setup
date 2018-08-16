@@ -8,8 +8,17 @@
     - software
     - docker
 
-- name: install neovim
-  command: brew install neovim
+- name: install homebrew
+  command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+- name: install mas-cli
+  command: brew cask install "{{item}}"
+  with_items:
+    - git
+    - npm
+    - flux
+    - gimp
+    - neovim
 
 - name: install zsh
   command: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
