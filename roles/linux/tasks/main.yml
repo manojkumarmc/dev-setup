@@ -11,34 +11,8 @@
     - software
     - docker
 
-- name: setup neovim repo
-  command: curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
-
-- name: install linux dependencies
-  yum: name={{item}} state=latest
-  with_items:
-    - epel-release
-    - gcc
-    - ncurses
-    - ncurses-devel
-    - make
-    - libevent
-    - libevent-devel
-    - ruby
-    - ruby-devel
-    - python-devel
-    - tcl
-    - tcl-devel
-    - perl
-    - perl-devel
-    - automake
-    - neovim
-    - git
-    - ctags
-    - zsh
-
-- name: install neovim
-  pip: name=neovim state=latest
+#- name: install neovim
+#  pip: name=neovim state=latest
 
 - name: install oh-my-zsh
   command: curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -o /tmp/install.sh
@@ -76,11 +50,11 @@
 # - name: install vim plugins
 #   command: sh -c "nvim +'PlugInstall --sync' +qa"
 
-- name: install virtualenv
-  pip: name=virtualenv state=latest
-
-- name: create p27 virtualenv
-  command: sh -c "virtualenv -p python2.7 ~/projects/software/p27"
+#- name: install virtualenv
+#  pip: name=virtualenv state=latest
+#
+#- name: create p27 virtualenv
+#  command: sh -c "virtualenv -p python2.7 ~/projects/software/p27"
 
 - name: install ipython to p27 virtualenv
   pip: virtualenv=~/projects/software/p27 name={{item}} state=latest

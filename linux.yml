@@ -1,4 +1,114 @@
 ---
-- hosts: all
-  roles:
-    - linux
+
+- name: Start with linux dependencies installation
+  hosts: localhost
+  become: True
+  gather_facts: False
+
+  tasks:
+  - name: Check epel-release exists
+    yum: name=epel-release state=present
+
+  - name: Check all packages are available
+    yum: name= {{ item }} state=present
+    ignore_errors: True
+    loop:
+      - automake
+      - bluez
+      - bluez-tools
+      - brave
+      - brave-browser
+      - brave-keyring
+      - caca-utils
+      - cargo
+      - cmake
+      - cmake3
+      - compat-libxcb
+      - ctags
+      - docker-selinux
+      - etcd
+      - fd-find
+      - feh
+      - gcc
+      - gimp
+      - git
+      - gnome-bluetooth
+      - gnome-tweak
+      - gnome-tweak-tool
+      - guake
+      - highlight
+      - httpie
+      - ibcurl-devel
+      - ibm-kvm-clone
+      - kubectl
+      - libX11-devel
+      - libXinerama-devel
+      - libXt-devel
+      - libarchive
+      - libev
+      - libev-devel
+      - libevent
+      - libevent-devel
+      - libffi
+      - libffi-devel
+      - libpng-devel
+      - libsodium
+      - libsodium-devel
+      - libvirt
+      - libvirt-daemon-kvm
+      - libxcb
+      - libxcb-devel
+      - libxcb-doc
+      - lightdm
+      - locate
+      - lynx
+      - make
+      - mlocate
+      - ncurses
+      - ncurses-devel
+      - neovim
+      - nm-applet
+      - openvpn
+      - pandoc
+      - perl
+      - perl-devel
+      - python-devel
+      - python-wand
+      - qemu-kvm
+      - qt5-qt3d
+      - qt5-qt3d-devel
+      - qt5-qtbase
+      - qt5-qtbase-devel
+      - rfkill
+      - ruby
+      - ruby-devel
+      - sqlite
+      - startup-notification
+      - startup-notification-devel
+      - tcl
+      - tcl-devel
+      - terminator
+      - tmux
+      - tmux-top
+      - tmux-top-devel
+      - w3mimgdisplay
+      - xbacklight
+      - xcb-proto
+      - xcb-util
+      - xcb-util-cursor
+      - xcb-util-cursor-devel
+      - xcb-util-devel
+      - xcb-util-image
+      - xcb-util-image-devel
+      - xcb-util-keysyms
+      - xcb-util-keysyms-devel
+      - xcb-util-renderutil
+      - xcb-util-renderutil-devel
+      - xcb-util-wm
+      - xcb-util-wm xcb-util-wm-devel
+      - xcb-util-wm-devel
+      - xcfe-appfinder
+      - xfce4-appfinder
+      - xorg-x11-util-macros
+      - zeal
+      - zsh
