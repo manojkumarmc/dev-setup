@@ -39,7 +39,6 @@
       - highlight
       - httpie
       - ibcurl-devel
-      - ibm-kvm-clone
       - kubectl
       - libX11-devel
       - libXinerama-devel
